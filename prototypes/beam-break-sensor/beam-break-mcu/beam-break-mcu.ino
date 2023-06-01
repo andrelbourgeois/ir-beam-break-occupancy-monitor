@@ -1,19 +1,14 @@
 // constants for LED and signal
 //#define LEDon LOW
 //#define LEDoff HIGH
-#define noSIGNAL LOW
+#define noSIGNAL HIGH
 #define SIGNAL HIGH
 
 // declare pins
-// const byte LEDPIN = 3; // no LED pin because of 555 timer
-// const byte statusLED = 13;
-const byte RECPIN = 4;
+const byte RECPIN = 2;
 
-// declare variable to store most recent sensor status
-byte lastSensorStatus;
-
-byte inputStatus;
-byte lastStatus;
+bool inputStatus;
+bool lastStatus;
 
 void setup() {
   // open serial connection
@@ -22,18 +17,19 @@ void setup() {
 
   // set IR recevier as input
   pinMode(RECPIN, INPUT);
-  digitalWrite(RECPIN, noSIGNAL);
+  //digitalWrite(RECPIN, SIGNAL);
 
-  // tone(LEDPIN, 38000); // no tone because of 555, frequency is in the HW
 }
 
 void loop() {
   
   inputStatus = digitalRead(RECPIN);
-  Serial.println(RECPIN);
-  Serial.println();
+  Serial.println(inputStatus);
+  //Serial.println(RECPIN);
+  //Serial.println();
   
-  if (inputStatus == SIGNAL && inputStatus != lastStatus) {
+  //if (inputStatus == noSIGNAL && inputStatus != lastStatus) {
+  if (inputStatus == noSIGNAL) {
       Serial.println("BROKEN");
       Serial.println();   
     }
