@@ -1,41 +1,41 @@
 // constants for LED and signal
-//#define LEDon LOW
-//#define LEDoff HIGH
+// signal and nosignal allow better code readability
 #define noSIGNAL HIGH
 #define SIGNAL HIGH
 
-// declare pins
+// declare pin for recieving data from ir sensor
 const byte RECPIN = 2;
 
+// declare bool variables for holding current and previous sensor readings
 bool inputStatus;
 bool lastStatus;
 
 void setup() {
   // open serial connection
   Serial.begin(9600);
+  // delay to ensure connection before anything else
   delay(100);
 
-  // set IR recevier as input
+  // set ir recevier as input
   pinMode(RECPIN, INPUT);
-  //digitalWrite(RECPIN, SIGNAL);
-
 }
 
 void loop() {
-  
+  // read ir sensor and save to inputstatus
   inputStatus = digitalRead(RECPIN);
-  Serial.println(inputStatus);
-  //Serial.println(RECPIN);
+  // print value for debugging
+  //Serial.println(inputStatus);
   //Serial.println();
   
-  //if (inputStatus == noSIGNAL && inputStatus != lastStatus) {
-  if (inputStatus == noSIGNAL) {
+  if (inputStatus == noSIGNAL && inputStatus != lastStatus) {
+    // if nosignal and change in inputstatus, beam has been broken
       Serial.println("BROKEN");
       Serial.println();   
     }
 
+  // update laststatus
   lastStatus = inputStatus;
   
-  delay(1000);
+  delay(10);
 
 }
