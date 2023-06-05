@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# wifi and mqtt
+**/mcu_secrets.h
