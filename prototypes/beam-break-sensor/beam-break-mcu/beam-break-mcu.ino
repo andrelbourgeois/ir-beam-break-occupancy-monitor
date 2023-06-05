@@ -1,3 +1,6 @@
+// imports
+#include "mcu_secrets.h"
+
 // constants for LED and signal
 // signal and nosignal allow better code readability
 #define noSIGNAL HIGH
