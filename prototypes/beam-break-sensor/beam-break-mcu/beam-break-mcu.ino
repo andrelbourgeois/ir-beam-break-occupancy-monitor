@@ -23,6 +23,7 @@ void setup() {
 void loop() {
   // read ir sensor and save to inputstatus
   inputStatus = digitalRead(RECPIN);
+  
   // print value for debugging
   //Serial.println(inputStatus);
   //Serial.println();
@@ -35,6 +36,7 @@ void loop() {
 
   // update laststatus
   lastStatus = inputStatus;
+
   
   delay(10);
 
