@@ -87,11 +87,14 @@ void loop() {
       Serial.println(breakTime2);
       Serial.println();  
     };
+    
+    /*
     if (breakTime1 > breakTime2) {
       count += 1;
     } else if (breakTime2 > breakTime1) {
       count -= 1;
     }
+    */
     
     sendMQTT();
 
