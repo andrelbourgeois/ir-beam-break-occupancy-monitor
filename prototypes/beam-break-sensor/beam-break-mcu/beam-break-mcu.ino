@@ -107,6 +107,7 @@ void sendMQTT() {
 
   StaticJsonDocument<256> docSend;
   docSend["beam_status"] = "BROKEN";
+  docSend["break_time"] = GB.dateTime();
 
   // using buffer helps to allocate memory quicker
   char buffer[256];
