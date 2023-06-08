@@ -1,8 +1,11 @@
 # PROTOTYPES
 This folder contains the concise documentation for different prototypes that I developed throughout my research. Further information on each prototype including their design and build can be found in each respective folder.
 
+(put materials in little charts with item and amounts)
+
 ## Project Directory
-- [Basic Beam Break Sensor](#basic-beam-break-sensor)
+- [Basic Beam-Break Sensor](#basic-beam-break-sensor)
+- [555 Timer Beam-Break](#555-timer-beam-break)
 
 ## Basic Beam Break Sensor
 This was my first prototype and is enabled through the Arduino's built in Tone() function. The code is straightforward, sending a 38kHz tone from an IR LED to a TSOP38230 IR Reciever, detecting when the signal is broken, and printing a message through a serial connection to acknowledge the break.
@@ -13,3 +16,19 @@ This was my first prototype and is enabled through the Arduino's built in Tone()
 - TSOP38230 38kHz IR Receiver x1
 - 10k Resistor x1
 - Lead Cables
+
+## 555 Timer Beam-Break
+x
+
+### Materials
+- NodeMCU
+- IR LED x1
+- TSOP38230 38kHz IR Receiver x1
+- 10k Resistor x1
+- 10k Adjustable Resistor x1
+- 1k Resistoer x1
+- Capacitor x1
+- Capacitor x1
+- Capacitor x1
+- Lead Cables
+
