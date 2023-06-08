@@ -21,6 +21,13 @@ bool lastStatus1;
 bool status2;
 bool lastStatus2;
 
+// declare variable to hold the break times of each beam
+String breakTime1;
+String breakTime2;
+
+// declare variable to hold the occupancy count of the space being monitored
+int count;
+
 // wifi and mqtt info
 const char* ssid     = SECRET_SSID;
 const char* password = SECRET_PASS;
@@ -70,17 +77,18 @@ void loop() {
   
   if (status1 == noSIGNAL && status1 != lastStatus1) {
     // if nosignal and change in inputstatus, beam has been broken
-      sendMQTT();
+      //sendMQTT();
       Serial.println("BEAM 1 BROKEN");
       Serial.println();   
     } else if (status2 == noSIGNAL && status2 != lastStatus2) {
+      //sendMQTT();
       Serial.println("BEAM 2 BROKEN");
       Serial.println();  
     };
 
   // update laststatus
   lastStatus1 = status1;
-  lastStatus2 = statua2;
+  lastStatus2 = status2;
   
   delay(10);
 }
