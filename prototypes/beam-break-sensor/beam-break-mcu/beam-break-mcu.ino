@@ -10,12 +10,16 @@
 #define noSIGNAL HIGH
 #define SIGNAL HIGH
 
-// declare pin for recieving data from ir sensor
-const byte RECPIN = 2;
+// declare pins to pull data from ir receievers
+const byte RECPIN1 = 2;
+const byte RECPIN2 = 4;
 
 // declare bool variables for holding current and previous sensor readings
-bool inputStatus;
-bool lastStatus;
+bool status1;
+bool lastStatus1;
+// 2nd beam
+bool status2;
+bool lastStatus2;
 
 // wifi and mqtt info
 const char* ssid     = SECRET_SSID;
@@ -40,8 +44,9 @@ void setup() {
   // delay to ensure connection before anything else
   delay(100);
 
-  // set ir recevier as input
-  pinMode(RECPIN, INPUT);
+  // set ir receviers as inputs
+  pinMode(RECPIN1, INPUT);
+  pinMode(RECPIN2, INPUT);
 
   // intialize wifi and sync date
   startWifi();
@@ -53,22 +58,29 @@ void setup() {
 }
 
 void loop() {
-  // read ir sensor and save to inputstatus
-  inputStatus = digitalRead(RECPIN);
+  // read ir sensors and save to status1 and 2
+  status1 = digitalRead(RECPIN1);
+  status2 = digitalRead(RECPIN2);
   
   // print value for debugging
-  //Serial.println(inputStatus);
+  //Serial.println(status1);
+  //Serial.println();
+  //Serial.println(status2);
   //Serial.println();
   
-  if (inputStatus == noSIGNAL && inputStatus != lastStatus) {
+  if (status1 == noSIGNAL && status1 != lastStatus1) {
     // if nosignal and change in inputstatus, beam has been broken
       sendMQTT();
-      Serial.println("BROKEN");
+      Serial.println("BEAM 1 BROKEN");
       Serial.println();   
-    }
+    } else if (status2 == noSIGNAL && status2 != lastStatus2) {
+      Serial.println("BEAM 2 BROKEN");
+      Serial.println();  
+    };
 
   // update laststatus
-  lastStatus = inputStatus;
+  lastStatus1 = status1;
+  lastStatus2 = statua2;
   
   delay(10);
 }
@@ -106,7 +118,7 @@ void sendMQTT() {
   client.loop();
 
   StaticJsonDocument<256> docSend;
-  docSend["beam_status"] = "BROKEN";
+  docSend["beam_1_status"] = "BROKEN";
   docSend["break_time"] = GB.dateTime();
 
   // using buffer helps to allocate memory quicker
