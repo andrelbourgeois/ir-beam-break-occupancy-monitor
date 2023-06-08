@@ -26,7 +26,7 @@ String breakTime1;
 String breakTime2;
 
 // declare variable to hold the occupancy count of the space being monitored
-int count;
+int count 0;
 
 // wifi and mqtt info
 const char* ssid     = SECRET_SSID;
@@ -77,14 +77,23 @@ void loop() {
   
   if (status1 == noSIGNAL && status1 != lastStatus1) {
     // if nosignal and change in inputstatus, beam has been broken
-      //sendMQTT();
       Serial.println("BEAM 1 BROKEN");
-      Serial.println();   
+      breakTime1 = GB.dateTime()
+      Serial.println(breakTime1);
+      Serial.println();
     } else if (status2 == noSIGNAL && status2 != lastStatus2) {
-      //sendMQTT();
       Serial.println("BEAM 2 BROKEN");
+      breakTime2 = GB.dateTime()
+      Serial.println(breakTime2);
       Serial.println();  
     };
+    if (breakTime1 > breakTime2) {
+      count += 1;
+    } else if (breakTime2 > breakTime1) {
+      count -= 1;
+    }
+    
+    sendMQTT();
 
   // update laststatus
   lastStatus1 = status1;
@@ -126,15 +135,15 @@ void sendMQTT() {
   client.loop();
 
   StaticJsonDocument<256> docSend;
-  docSend["beam_1_status"] = "BROKEN";
-  docSend["break_time"] = GB.dateTime();
+  docSend["room_count"] = count;
+  docSend["count_time"] = GB.dateTime();
 
   // using buffer helps to allocate memory quicker
   char buffer[256];
   // serialize json document
   serializeJson(docSend, buffer);
   // publish json document
-  client.publish("student/ucfnbou/beam-break2", buffer);
+  client.publish("student/ucfnbou/lab_occupancy", buffer);
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
@@ -166,7 +175,7 @@ void reconnect() {
     if (client.connect(clientId.c_str(), mqttuser, mqttpass)) {
       Serial.println("connected");
       // ... and resubscribe
-      client.subscribe("student/ucfnbou/medConnected");
+      client.subscribe("student/ucfnbou/lab_occupancy");
     } else {
       Serial.print("failed, rc=");
       Serial.print(client.state());
