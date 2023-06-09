@@ -26,7 +26,7 @@ String breakTime1;
 String breakTime2;
 
 // declare variable to hold the occupancy count of the space being monitored
-int count 0;
+int count = 0;
 
 // wifi and mqtt info
 const char* ssid     = SECRET_SSID;
@@ -78,12 +78,12 @@ void loop() {
   if (status1 == noSIGNAL && status1 != lastStatus1) {
     // if nosignal and change in inputstatus, beam has been broken
       Serial.println("BEAM 1 BROKEN");
-      breakTime1 = GB.dateTime()
+      breakTime1 = GB.dateTime();
       Serial.println(breakTime1);
       Serial.println();
     } else if (status2 == noSIGNAL && status2 != lastStatus2) {
       Serial.println("BEAM 2 BROKEN");
-      breakTime2 = GB.dateTime()
+      breakTime2 = GB.dateTime();
       Serial.println(breakTime2);
       Serial.println();  
     };
@@ -96,7 +96,7 @@ void loop() {
     }
     */
     
-    sendMQTT();
+    // sendMQTT();
 
   // update laststatus
   lastStatus1 = status1;
