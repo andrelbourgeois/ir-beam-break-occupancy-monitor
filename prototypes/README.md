@@ -44,6 +44,8 @@ Photos of the 555 beam-break prototype, built on a large breadboard; not picture
 - USB power cable
 - Large breadboard x1
 
+------add circuit image---------
+
 ## Prototype 3: Veroboard Beam-Break
 This prototype replicates prototype 2 but in a sturdier form, exchanging the breadboard for a solderable veroboard - in this case, the electrcookie solderable breadboard and a piece of miscallaneous stripboard. This will allow for a stable and reliable deployment in order to capture data while prototype 4 is in development. The timer circuit is now powered by a 9V battery, and the reciever circuit continues to be attached to and powered by the nodeMCU ESP8266.
 <br>
