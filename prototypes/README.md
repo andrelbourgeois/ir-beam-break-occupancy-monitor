@@ -22,6 +22,7 @@ This was the first prototype and is enabled through the Arduino's built in Tone(
 
 ## Prototype 2: 555 Timer Beam-Break
 This prototype is enabled by a 555 timer. The processing within this intelligent piece of hardware uses the resistance and capacitance of its circuit to determine the frequency which to light the LED. The reciever in this prototype has remained the same but is now connected to a nodeMCU ESP8266, while the 555 timer circuit is being run from a usb power cable.
+<br>
 -----------add fritzing photos-----------
 <br>
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/3d37cc41-50e9-4670-b14c-3be2fbc4067d" style="height:400px;" />
@@ -47,7 +48,8 @@ Photos of the 555 beam-break prototype, built on a large breadboard; not picture
 ------add circuit image---------
 
 ## Prototype 3: Veroboard Beam-Break
-This prototype replicates prototype 2 but in a sturdier form, exchanging the breadboard for a solderable veroboard - in this case, the electrcookie solderable breadboard and a piece of miscallaneous stripboard. This will allow for a stable and reliable deployment in order to capture data while prototype 4 is in development. The timer circuit is now powered by a 9V battery, and the reciever circuit continues to be attached to and powered by the nodeMCU ESP8266.
+This prototype replicates prototype 2 but in a sturdier form, exchanging the breadboard for a solderable veroboard - in this case, the electrcookie solderable breadboard and a piece of miscallaneous stripboard. This will allow for a stable and reliable deployment in order to capture data while prototype 4 is in development. The timer circuit is now powered by a 9V battery, and the reciever circuit continues to be attached to and powered by the nodeMCU ESP8266. As this is the first deployed prototyep, this was the first to contain two separate LED-receiver pairs. A paired approached allows for the determination of movement direction with the system.
+<br>
 --------update images, add receiver images---------
 <br>
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/2568b259-e17c-4ca5-a091-03b8e80cdc08" style="height:400px;" />
@@ -55,7 +57,7 @@ This prototype replicates prototype 2 but in a sturdier form, exchanging the bre
 <br>
 Photos of the first veroboard beam-break prototype, built on an Electrocookie solderable breadboard.
 
-### Materials One Circuit
+### Materials for One Circuit
 - NodeMCU ESP8266 x1
 - Texas Instruments NE555 precision timer x1
 - IR LED x1
