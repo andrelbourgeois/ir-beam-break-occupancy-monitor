@@ -20,7 +20,7 @@ This was the first prototype and is enabled through the Arduino's built in Tone(
 
 ## 555 Timer Beam-Break
 This was the second prototype and is enabled through with a 555 timer. The processing within this intelligent piece of hardware uses the resistance and capacitance of its circuit to determine the frequency which to light the LED.
------------add fritzing photos--------------------------------
+-----------add fritzing photos-----------
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/3d37cc41-50e9-4670-b14c-3be2fbc4067d" style="height:400px;" />
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/1f5482f9-268d-4188-80a7-13dc4b478ce9" style="height:400px;"/>
 <br>
