@@ -52,6 +52,8 @@ This prototype replicates prototype 2 but in a sturdier form, exchanging the bre
 <br>
 --------update images, add receiver images---------
 <br>
+--------add images of circuit diagrams, pinouts, etc---------
+<br>
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/2568b259-e17c-4ca5-a091-03b8e80cdc08" style="height:400px;" />
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/4bfb9f14-5b99-434f-a9b6-d0deb6a123b8" style="height:400px;" />
 <br>
@@ -74,4 +76,8 @@ Photos of the first veroboard beam-break prototype, built on an Electrocookie so
 - 9V battery x1
 
 ## Prototype 4: PCB Beam-Break
+--------add images of circuit diagrams, pcb layout, etc---------
+<img src="" style="height:400px;" />
+<img src="" style="height:400px;" />
+<img src="" style="height:400px;" />
 
