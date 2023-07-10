@@ -23,8 +23,8 @@ bool status2;
 bool lastStatus2;
 
 // declare variable to hold the break times of each beam
-String breakTime1;
-String breakTime2;
+int breakTime1 = 0;
+int breakTime2 = 0;
 
 // declare variable to hold the occupancy count of the space
 int occupancy = 0;
@@ -82,24 +82,24 @@ void loop() {
   if (status1 == noSIGNAL && status1 != lastStatus1) {
     // if nosignal & change in inputstatus, beam has been broken
       Serial.println("BEAM 1 BROKEN");
-      breakTime1 = GB.dateTime();
+      breakTime1 = GB.now();
+      if (breakTime1 > (breakTime2 + 1)) {
+        occupancy += 1;
+      }
+      else {
+        occupancy -= 1;
+      }
       Serial.println(breakTime1);
       Serial.println();
     }
   
   else if (status2 == noSIGNAL && status2 != lastStatus2) { // check beam 2
       Serial.println("BEAM 2 BROKEN");
-      breakTime2 = GB.dateTime();
+      breakTime2 = GB.now();
       Serial.println(breakTime2);
       Serial.println();  
     }
-
-  // calcualte occupancy
-  if (breakTime1 > breakTime2) { // beam 1 broke before beam 2; +1 person in the space
-    occupancy += 1;
-  } else if (breakTime2 > breakTime1) { // beam 2 broke before beam 1; -1 person in the space
-    occupancy -= 1;
-  }
+  
     
   sendMQTT();
 
