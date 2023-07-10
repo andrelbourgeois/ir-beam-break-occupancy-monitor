@@ -3,21 +3,22 @@
 #include <PubSubClient.h> // publish & subscribe to mqtt
 #include <ArduinoJson.h> // send and recieve json data, ideal for push to webhost
 #include <WiFi.h> // connect mcu to wifi
-#include "esp32_secrets.h" // contains sensitive info such as wifi and mqtt passwords, prevents upload to github
+#include "mcu_secrets.h" // contains sensitive info such as wifi and mqtt passwords, prevents upload to github
 
-// constants for LED and signal
+// declare constants for LED and signal
 // signal and nosignal allow better code readability
 #define noSIGNAL HIGH
-#define SIGNAL HIGH
+#define SIGNAL LOW
 
 // declare pins to pull data from ir receievers
 const byte RECPIN1 = 26;
 const byte RECPIN2 = 33;
 
 // declare bool variables for holding current and previous sensor readings
+// beam 1
 bool status1;
 bool lastStatus1;
-// 2nd beam
+// beam 2
 bool status2;
 bool lastStatus2;
 
@@ -25,7 +26,7 @@ bool lastStatus2;
 String breakTime1;
 String breakTime2;
 
-// declare variable to hold the occupancy count of the space being monitored
+// declare variable to hold the occupancy count of the space
 int occupancy = 0;
 
 // wifi and mqtt info
@@ -46,12 +47,13 @@ int value = 0;
 Timezone GB;
 
 void setup() {
+  
   // open serial connection
   Serial.begin(9600);
   // delay to ensure connection before anything else
   delay(100);
 
-  // set ir receviers as inputs
+  // set ir recevier pins as inputs
   pinMode(RECPIN1, INPUT);
   pinMode(RECPIN2, INPUT);
 
@@ -65,38 +67,41 @@ void setup() {
 }
 
 void loop() {
-  // read ir sensors and save to status1 and 2
+  
+  // read ir sensors and save ir receiever status (HIGH or LOW; noSIGNAL or SIGNAL)
   status1 = digitalRead(RECPIN1);
   status2 = digitalRead(RECPIN2);
   
-  // print value for debugging
+  // print valuse for debugging
   //Serial.println(status1);
   //Serial.println();
   //Serial.println(status2);
   //Serial.println();
-  
+
+  // check beam 1
   if (status1 == noSIGNAL && status1 != lastStatus1) {
-    // if nosignal and change in inputstatus, beam has been broken
+    // if nosignal & change in inputstatus, beam has been broken
       Serial.println("BEAM 1 BROKEN");
       breakTime1 = GB.dateTime();
       Serial.println(breakTime1);
       Serial.println();
-    } else if (status2 == noSIGNAL && status2 != lastStatus2) {
+    }
+  
+  else if (status2 == noSIGNAL && status2 != lastStatus2) { // check beam 2
       Serial.println("BEAM 2 BROKEN");
       breakTime2 = GB.dateTime();
       Serial.println(breakTime2);
       Serial.println();  
-    };
-    
-    /*
-    if (breakTime1 > breakTime2) {
-      count += 1;
-    } else if (breakTime2 > breakTime1) {
-      count -= 1;
     }
-    */
+
+  // calcualte occupancy
+  if (breakTime1 > breakTime2) { // beam 1 broke before beam 2; +1 person in the space
+    occupancy += 1;
+  } else if (breakTime2 > breakTime1) { // beam 2 broke before beam 1; -1 person in the space
+    occupancy -= 1;
+  }
     
-    sendMQTT();
+  sendMQTT();
 
   // update laststatus
   lastStatus1 = status1;
@@ -138,8 +143,8 @@ void sendMQTT() {
   client.loop();
 
   StaticJsonDocument<256> docSend;
-  docSend["room_count"] = occupancy;
-  docSend["count_time"] = GB.dateTime();
+  docSend["occupancy"] = occupancy;
+  docSend["time"] = GB.dateTime();
 
   // using buffer helps to allocate memory quicker
   char buffer[256];
@@ -150,20 +155,20 @@ void sendMQTT() {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
-  //Serial.print("Message arrived [");
-  //Serial.print(topic);
-  //Serial.print("] ");
-  //for (int i = 0; i < length; i++) {
-    //Serial.print((char)payload[i]);
-  //}
-  //Serial.println();
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+  }
+  Serial.println();
 
   StaticJsonDocument<256> docRec;  // Allocate the JSON document
   deserializeJson(docRec, payload, length);// Deserialize the JSON document
   String myString = String((char*)payload);
   int myValue = docRec["beam_status"];
-  //Serial.print(myValue);
-  //Serial.println();
+  Serial.print(myValue);
+  Serial.println();
 }
 
 void reconnect() {

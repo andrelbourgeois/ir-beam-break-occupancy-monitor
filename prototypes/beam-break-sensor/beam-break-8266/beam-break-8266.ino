@@ -3,12 +3,12 @@
 #include <PubSubClient.h> // subscribe and publish to mqtt
 #include <ArduinoJson.h> // send and recieve json data
 #include <ESP8266WiFi.h> // connect mcu to wifi
-#include "esp8266_secrets.h" // sensitive info such as wifi and mqtt passwords
+#include "mcu_secrets.h" // sensitive info such as wifi and mqtt passwords
 
 // constants for LED and signal
 // signal and nosignal allow better code readability
 #define noSIGNAL HIGH
-#define SIGNAL HIGH
+#define SIGNAL LOW
 
 // declare pins to pull data from ir receievers
 const byte RECPIN1 = 26;
