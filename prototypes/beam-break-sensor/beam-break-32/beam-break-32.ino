@@ -1,9 +1,9 @@
 // imports
-#include <ezTime.h> // timestamp
-#include <PubSubClient.h> // subscribe and publish to mqtt
-#include <ArduinoJson.h> // send and recieve json data
-#include <ESP8266WiFi.h> // connect mcu to wifi
-#include "mcu_secrets.h" // sensitive info such as wifi and mqtt passwords
+#include <ezTime.h> // provides timestamp
+#include <PubSubClient.h> // publish & subscribe to mqtt
+#include <ArduinoJson.h> // send and recieve json data, ideal for push to webhost
+#include <WiFi.h> // connect mcu to wifi
+#include "esp32_secrets.h" // contains sensitive info such as wifi and mqtt passwords, prevents upload to github
 
 // constants for LED and signal
 // signal and nosignal allow better code readability
@@ -11,8 +11,8 @@
 #define SIGNAL HIGH
 
 // declare pins to pull data from ir receievers
-const byte RECPIN1 = 2;
-const byte RECPIN2 = 4;
+const byte RECPIN1 = 26;
+const byte RECPIN2 = 33;
 
 // declare bool variables for holding current and previous sensor readings
 bool status1;
@@ -26,7 +26,7 @@ String breakTime1;
 String breakTime2;
 
 // declare variable to hold the occupancy count of the space being monitored
-int count = 0;
+int occupancy = 0;
 
 // wifi and mqtt info
 const char* ssid     = SECRET_SSID;
@@ -34,7 +34,7 @@ const char* password = SECRET_PASS;
 const char* mqttuser = SECRET_MQTTUSER;
 const char* mqttpass = SECRET_MQTTPASS;
 const char* mqtt_server = "mqtt.cetools.org";
-const char* topic = "student/ucfnbou/beam-break1";
+const char* topic = "student/ucfnbou/lab_occupancy";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -96,13 +96,13 @@ void loop() {
     }
     */
     
-    // sendMQTT();
+    sendMQTT();
 
   // update laststatus
   lastStatus1 = status1;
   lastStatus2 = status2;
   
-  delay(10);
+  delay(100);
 }
 
 void startWifi() {
@@ -138,7 +138,7 @@ void sendMQTT() {
   client.loop();
 
   StaticJsonDocument<256> docSend;
-  docSend["room_count"] = count;
+  docSend["room_count"] = occupancy;
   docSend["count_time"] = GB.dateTime();
 
   // using buffer helps to allocate memory quicker
@@ -150,20 +150,20 @@ void sendMQTT() {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
-  Serial.print("Message arrived [");
-  Serial.print(topic);
-  Serial.print("] ");
-  for (int i = 0; i < length; i++) {
-    Serial.print((char)payload[i]);
-  }
-  Serial.println();
+  //Serial.print("Message arrived [");
+  //Serial.print(topic);
+  //Serial.print("] ");
+  //for (int i = 0; i < length; i++) {
+    //Serial.print((char)payload[i]);
+  //}
+  //Serial.println();
 
   StaticJsonDocument<256> docRec;  // Allocate the JSON document
   deserializeJson(docRec, payload, length);// Deserialize the JSON document
   String myString = String((char*)payload);
   int myValue = docRec["beam_status"];
-  Serial.print(myValue);
-  Serial.println();
+  //Serial.print(myValue);
+  //Serial.println();
 }
 
 void reconnect() {
