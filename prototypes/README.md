@@ -57,7 +57,10 @@ This prototype replicates prototype 2 but in a sturdier form, exchanging the bre
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/2568b259-e17c-4ca5-a091-03b8e80cdc08" style="height:400px;" />
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/4bfb9f14-5b99-434f-a9b6-d0deb6a123b8" style="height:400px;" />
 <br>
-Photos of the first veroboard beam-break prototype, built on an Electrocookie solderable breadboard.
+Photos of the first veroboard beam-break prototype, built on an Electrocookie solderable breadboard; doesn't include cabling for power.
+<br>
+
+
 
 ### Materials for One Circuit
 - NodeMCU ESP8266 x1
