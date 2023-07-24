@@ -5,32 +5,35 @@
 #include <ESP8266WiFi.h> // connect mcu to wifi
 #include "mcu_secrets.h" // sensitive info such as wifi and mqtt passwords
 
-// constants for LED and signal
-// signal and nosignal allow better code readability
+// declare constants for IR signal
+// signal and nosignal allow for better code readability
 #define noSIGNAL HIGH
 #define SIGNAL LOW
 
 // declare pins to pull data from ir receievers
-const byte RECPIN1 = 26;
-const byte RECPIN2 = 33;
+const byte RECPIN1 = 2;
+const byte RECPIN2 = 4;
 
 // declare bool variables for holding current and previous sensor readings
+//beam 1
 bool status1;
 bool lastStatus1;
-// 2nd beam
+// beam 2
 bool status2;
 bool lastStatus2;
 
-// declare variable to hold the break times of each beam
-String breakTime1;
-String breakTime2;
+// declare variables to hold the break times of each beam
+int breakTime1 = 0;
+int breakTime2 = 0;
 
-// declare variable to hold the occupancy count of the space being monitored
+// declare variable to hold the occupancy count of the space
 int occupancy = 0;
 
-// wifi and mqtt info
+// wifi info
 const char* ssid     = SECRET_SSID;
 const char* password = SECRET_PASS;
+
+// mqtt info
 const char* mqttuser = SECRET_MQTTUSER;
 const char* mqttpass = SECRET_MQTTPASS;
 const char* mqtt_server = "mqtt.cetools.org";
@@ -40,15 +43,15 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 long lastMsg = 0;
 char msg[50];
-int value = 0;
+int value = 0; 
 
-// data and time
+// date and time
 Timezone GB;
 
 void setup() {
   // open serial connection
   Serial.begin(9600);
-  // delay to ensure connection before anything else
+  // delay ensures connection before anything else
   delay(100);
 
   // set ir receviers as inputs
@@ -62,47 +65,50 @@ void setup() {
   // begin mqtt connection
   client.setServer(mqtt_server, 1884);
   client.setCallback(callback);
+
+  Serial.print("setup complete");
 }
 
 void loop() {
-  // read ir sensors and save to status1 and 2
+  // read ir sensors and save ir receiever status (HIGH or LOW; noSIGNAL or SIGNAL)
   status1 = digitalRead(RECPIN1);
   status2 = digitalRead(RECPIN2);
+  Serial.println("beginning loop");
   
-  // print value for debugging
-  //Serial.println(status1);
-  //Serial.println();
-  //Serial.println(status2);
-  //Serial.println();
-  
-  if (status1 == noSIGNAL && status1 != lastStatus1) {
-    // if nosignal and change in inputstatus, beam has been broken
+   // check beam 1
+  if (status1 == noSIGNAL && status1 != lastStatus1) { // if nosignal & change in inputstatus, beam has been broken
       Serial.println("BEAM 1 BROKEN");
-      breakTime1 = GB.dateTime();
+      // capture time of break for comparison; .now() gets time as an integer
+      breakTime1 = GB.now();
       Serial.println(breakTime1);
       Serial.println();
-    } else if (status2 == noSIGNAL && status2 != lastStatus2) {
-      Serial.println("BEAM 2 BROKEN");
-      breakTime2 = GB.dateTime();
-      Serial.println(breakTime2);
-      Serial.println();  
-    };
-    
-    /*
-    if (breakTime1 > breakTime2) {
-      count += 1;
-    } else if (breakTime2 > breakTime1) {
-      count -= 1;
+      // check if second beam has been broken recently
+      if (breakTime1 > (breakTime2 + 1)) {
+        // if not, occupancy inflow
+        occupancy += 1;
+      }
+      else { // else, occupancy outflow
+        occupancy -= 1;
+      }
     }
-    */
+  
+  else if (status2 == noSIGNAL && status2 != lastStatus2) { // check beam 2
+      Serial.println("BEAM 2 BROKEN");
+      // capture time for break comparison
+      breakTime2 = GB.now();
+      Serial.println(breakTime2);
+      Serial.println();
+    }
     
     sendMQTT();
 
   // update laststatus
   lastStatus1 = status1;
   lastStatus2 = status2;
+
+  Serial.println("ending loop");
   
-  delay(100);
+  delay(1000);
 }
 
 void startWifi() {
@@ -138,8 +144,8 @@ void sendMQTT() {
   client.loop();
 
   StaticJsonDocument<256> docSend;
-  docSend["room_count"] = occupancy;
-  docSend["count_time"] = GB.dateTime();
+  docSend["occupancy"] = occupancy;
+  docSend["time"] = GB.dateTime();
 
   // using buffer helps to allocate memory quicker
   char buffer[256];
@@ -150,20 +156,20 @@ void sendMQTT() {
 }
 
 void callback(char* topic, byte* payload, unsigned int length) {
-  //Serial.print("Message arrived [");
-  //Serial.print(topic);
-  //Serial.print("] ");
-  //for (int i = 0; i < length; i++) {
-    //Serial.print((char)payload[i]);
-  //}
-  //Serial.println();
+  Serial.print("Message arrived [");
+  Serial.print(topic);
+  Serial.print("] ");
+  for (int i = 0; i < length; i++) {
+    Serial.print((char)payload[i]);
+  }
+  Serial.println();
 
   StaticJsonDocument<256> docRec;  // Allocate the JSON document
   deserializeJson(docRec, payload, length);// Deserialize the JSON document
   String myString = String((char*)payload);
   int myValue = docRec["beam_status"];
-  //Serial.print(myValue);
-  //Serial.println();
+  Serial.print(myValue);
+  Serial.println();
 }
 
 void reconnect() {

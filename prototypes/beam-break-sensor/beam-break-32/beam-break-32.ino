@@ -5,8 +5,8 @@
 #include <WiFi.h> // connect mcu to wifi
 #include "mcu_secrets.h" // contains sensitive info such as wifi and mqtt passwords, prevents upload to github
 
-// declare constants for LED and signal
-// signal and nosignal allow better code readability
+// declare constants for IR signal
+// signal and nosignal allow for better code readability
 #define noSIGNAL HIGH
 #define SIGNAL LOW
 
@@ -22,7 +22,7 @@ bool lastStatus1;
 bool status2;
 bool lastStatus2;
 
-// declare variable to hold the break times of each beam
+// declare variables to hold the break times of each beam
 int breakTime1 = 0;
 int breakTime2 = 0;
 
@@ -43,14 +43,14 @@ long lastMsg = 0;
 char msg[50];
 int value = 0;
 
-// data and time
+// date and time
 Timezone GB;
 
 void setup() {
   
   // open serial connection
   Serial.begin(9600);
-  // delay to ensure connection before anything else
+  // delay ensures connection before anything else
   delay(100);
 
   // set ir recevier pins as inputs
@@ -78,30 +78,32 @@ void loop() {
   //Serial.println(status2);
   //Serial.println();
 
-  // check beam 1
-  if (status1 == noSIGNAL && status1 != lastStatus1) {
-    // if nosignal & change in inputstatus, beam has been broken
+   // check beam 1
+  if (status1 == noSIGNAL && status1 != lastStatus1) { // if nosignal & change in inputstatus, beam has been broken
       Serial.println("BEAM 1 BROKEN");
+      // capture time of break for comparison; .now() gets breaktime as an integer
       breakTime1 = GB.now();
-      if (breakTime1 > (breakTime2 + 1)) {
-        occupancy += 1;
-      }
-      else {
-        occupancy -= 1;
-      }
       Serial.println(breakTime1);
       Serial.println();
+      // check if second beam has been broken recently
+      if (breakTime1 > (breakTime2 + 1)) {
+        // if not, occupancy inflow
+        occupancy += 1;
+      }
+      else { // else, occupancy outlfow
+        occupancy -= 1;
+      }
     }
   
   else if (status2 == noSIGNAL && status2 != lastStatus2) { // check beam 2
       Serial.println("BEAM 2 BROKEN");
+      // capture time for break comparison
       breakTime2 = GB.now();
       Serial.println(breakTime2);
-      Serial.println();  
+      Serial.println();
     }
-  
     
-  sendMQTT();
+    sendMQTT();
 
   // update laststatus
   lastStatus1 = status1;
