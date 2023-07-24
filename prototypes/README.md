@@ -57,7 +57,13 @@ This prototype replicates prototype 2 but in a sturdier form, exchanging the bre
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/2568b259-e17c-4ca5-a091-03b8e80cdc08" style="height:400px;" />
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/4bfb9f14-5b99-434f-a9b6-d0deb6a123b8" style="height:400px;" />
 <br>
-Photos of the first veroboard beam-break prototype, built on an Electrocookie solderable breadboard.
+Photos of the first veroboard beam-break prototype, built on an Electrocookie solderable breadboard; doesn't include cabling for power.
+<br>
+<br>
+<img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/5b4b36f9-9f3d-4457-9ecd-c7b2c72df90a" style="height:400px;" />
+<img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/9d147aeb-5025-4483-8d9e-400a23a78b43" style="height:400px;" />
+<br>
+Photos of the veroboard beam-break prototype, including 9v battery power; deployed on cardboard.
 
 ### Materials for One Circuit
 - NodeMCU ESP8266 x1
@@ -74,6 +80,11 @@ Photos of the first veroboard beam-break prototype, built on an Electrocookie so
 - Small veroboard x1
 - Smaller veroboard x1
 - 9V battery x1
+
+### Materials for Deployment
+- Cardboard
+- Tape
+- Neodymium magents (used for weight and balance)
 
 ## Prototype 4: PCB Beam-Break
 --------add images of circuit diagrams, pcb layout, etc---------
