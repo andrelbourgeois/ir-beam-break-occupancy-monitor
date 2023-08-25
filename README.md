@@ -3,12 +3,12 @@ This repository contains my final dissertation in partial fulfilment of the requ
 
 ## Project Directory
 - [About](#about)
-- [Prototypes](https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/tree/main/prototypes)
-- [Code](#code)
-- [3D Models](#3d-models)
-- [PCBs](#pcbs)
 - [License](#license)
 - [Disclaimer](#disclaimer)
+
+- Information on prototypes can be found in [prototypes](https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/tree/main/prototypes)
+- Information on the final code for the project can be found in [final-code](https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/tree/main/final-code)
+- Information on the final build for the project can be found in [final-build](https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/tree/main/final-build)
 
 ## About
 
