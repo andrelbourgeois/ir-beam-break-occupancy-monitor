@@ -28,10 +28,4 @@ While the current implementation might not meet all the desired criteria, the co
 This project is licensed under the MIT License.
 
 ## Disclaimer
-The Readme.md files throughout this project repository were written with the assistance of ChatGPT.
-
-<!-- 
-- Final code for the project can be found in..
-- Experiments can be found in..
-- Licensing information can be found in..
--->
+The readme.md files throughout this project repository were written with the assistance of ChatGPT.
