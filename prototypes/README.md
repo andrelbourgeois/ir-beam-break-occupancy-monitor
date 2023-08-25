@@ -47,7 +47,7 @@ Photos of the 555 beam-break prototype, built on a large breadboard; not picture
 
 <img src="[https://github.com/andrelbourgeois/CASA0022/assets/33913141/1f5482f9-268d-4188-80a7-13dc4b478ce9](https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/assets/33913141/35d0faf1-92c4-470c-a856-ffc7417520d7)" style="height:400px;"/>
 <br>
-Referenced circuit schematic found [here](https://electrosome.com/ir-transmitter-receiver-led-tsop1738/)
+Referenced circuit schematic found here: https://electrosome.com/ir-transmitter-receiver-led-tsop1738/
 
 ## Prototype 3: Veroboard Beam-Break
 This prototype replicates prototype 2 but in a sturdier form, exchanging the breadboard for a solderable veroboard - in this case, the electrcookie solderable breadboard and a piece of miscallaneous stripboard. This will allow for a stable and reliable deployment in order to capture data while prototype 4 is in development. The timer circuit is now powered by a 9V battery, and the reciever circuit continues to be attached a nodeMCU ESP8266, while being powered through a portable battery pack via USB.
