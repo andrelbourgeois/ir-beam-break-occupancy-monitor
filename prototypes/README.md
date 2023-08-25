@@ -44,6 +44,7 @@ This prototype is based around an NE555 precision timer and served to develop a 
 <br>
 Photos of the 555 beam-break prototype, built on a large breadboard; not pictured, the IR receiver.
 <br>
+<br>
 
 <img src="https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/assets/33913141/35d0faf1-92c4-470c-a856-ffc7417520d7" style="height:400px;"/>
 <br>
