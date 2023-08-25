@@ -17,7 +17,7 @@ This was the first prototype and is enabled through the Arduino's built in Tone(
 - Lead cables
 - Small breadboard x1
 
-<img src="[https://github.com/andrelbourgeois/CASA0022/assets/33913141/3d37cc41-50e9-4670-b14c-3be2fbc4067d](https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/assets/33913141/a572e1c1-f1b5-48e5-98e4-6d0a025049fe)" style="height:400px;" />
+<img src="https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/assets/33913141/a572e1c1-f1b5-48e5-98e4-6d0a025049fe" style="height:400px;" />
 <br>
 Photos of the initial arduino beam-break prototype.
 
