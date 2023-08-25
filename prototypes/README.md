@@ -100,11 +100,3 @@ This deployment is similar to the first iteration, but replicated in 3D printed 
 
 <img src="https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/assets/33913141/db8b4a68-9648-41f0-9ff3-6de619480ba0" style="height:400px;" />
 
-
-## Prototype 4: PCB Beam-Break
--------- add images of circuit diagrams, pcb layout, etc ---------
--------- document problems with choosing components for pcb, not all components were there, had to workaround the ne555, etc ---------------
-<img src="" style="height:400px;" />
-<img src="" style="height:400px;" />
-<img src="" style="height:400px;" />
-
