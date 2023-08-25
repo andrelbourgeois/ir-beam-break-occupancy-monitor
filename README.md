@@ -3,7 +3,7 @@ This repository contains my final dissertation in partial fulfilment of the requ
 
 ## Project Directory
 - [About](#about)
-- [Prototypes]
+- [Prototypes](https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/tree/main/prototypes)
 - [Code](#code)
 - [3D Models](#3d-models)
 - [PCBs](#pcbs)
