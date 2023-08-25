@@ -114,6 +114,7 @@ Photos of the veroboard beam-break prototype, including 9v battery power; deploy
 
 ## Prototype 4: PCB Beam-Break
 -------- add images of circuit diagrams, pcb layout, etc ---------
+-------- document problems with choosing components for pcb, not all components were there, had to workaround the ne555, etc ---------------
 <img src="" style="height:400px;" />
 <img src="" style="height:400px;" />
 <img src="" style="height:400px;" />
