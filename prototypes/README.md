@@ -1,15 +1,10 @@
 # PROTOTYPES
 This folder contains the concise documentation for different prototypes that I developed throughout my research. Further information on each prototype including their design and build can be found in each respective folder. <br>
----------------- add chart comparing the different prototypes -------------------------- <br>
----------------- board, deployed, data storage, etc. ----------------------------------- <br>
-
-----------------put materials in little charts with item and amounts--------------------
 
 ## Project Directory
 1. [Basic Beam-Break Sensor](#basic-beam-break-sensor)
 2. [555 Timer Beam-Break](#555-timer-beam-break)
 3. [Veroboard Beam-Break](#veroboard-beam-break)
-4. [PCB Beam-Break](#pcb-beam-break)
 
 ## Prototype 1: Basic Beam Break Sensor
 This was the first prototype and is enabled through the Arduino's built in Tone() function and served to prove the viability of the technology in the quickest possible way. The code is straightforward, sending a 38kHz tone from an IR LED to a TSOP38230 IR Reciever, detecting when the signal is broken, and printing a message through a serial connection to acknowledge the break. In this prototype, the arduino is both sending, and recieving the signal.
@@ -22,7 +17,9 @@ This was the first prototype and is enabled through the Arduino's built in Tone(
 - Lead cables
 - Small breadboard x1
 
--------------------- add photos --------------------------
+<img src="[https://github.com/andrelbourgeois/CASA0022/assets/33913141/3d37cc41-50e9-4670-b14c-3be2fbc4067d](https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/assets/33913141/a572e1c1-f1b5-48e5-98e4-6d0a025049fe)" style="height:400px;" />
+<br>
+Photos of the initial arduino beam-break prototype.
 
 ## Prototype 2: 555 Timer Beam-Break
 This prototype is based around an NE555 precision timer and served to develop a more robust and scalable circuit for the system. The processing within this intelligent piece of hardware uses the resistance and capacitance of its circuit to determine the frequency which to flash the LED. By matching the LED flash and the reception frequency of the IR receiver, motion through the IR beam can be detected. The reciever in this prototype has remained the same but is now connected to a nodeMCU ESP8266, while the 555 timer circuit is being run from a usb power cable. The switch to the ESP8266 was made due to the affordability and smaller footprint of the device.
@@ -42,15 +39,15 @@ This prototype is based around an NE555 precision timer and served to develop a 
 - USB power cable
 - Large breadboard x1
 
-<br>
------------ add fritzing photos -----------
-<br>
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/3d37cc41-50e9-4670-b14c-3be2fbc4067d" style="height:400px;" />
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/1f5482f9-268d-4188-80a7-13dc4b478ce9" style="height:400px;"/>
 <br>
 Photos of the 555 beam-break prototype, built on a large breadboard; not pictured, the IR receiver.
+<br>
 
------- add circuit image ---------
+<img src="[https://github.com/andrelbourgeois/CASA0022/assets/33913141/1f5482f9-268d-4188-80a7-13dc4b478ce9](https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/assets/33913141/35d0faf1-92c4-470c-a856-ffc7417520d7)" style="height:400px;"/>
+<br>
+Referenced circuit schematic found [here](https://electrosome.com/ir-transmitter-receiver-led-tsop1738/)
 
 ## Prototype 3: Veroboard Beam-Break
 This prototype replicates prototype 2 but in a sturdier form, exchanging the breadboard for a solderable veroboard - in this case, the electrcookie solderable breadboard and a piece of miscallaneous stripboard. This will allow for a stable and reliable deployment in order to capture data while prototype 4 is in development. The timer circuit is now powered by a 9V battery, and the reciever circuit continues to be attached a nodeMCU ESP8266, while being powered through a portable battery pack via USB.
