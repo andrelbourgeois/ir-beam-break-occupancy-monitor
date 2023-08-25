@@ -69,15 +69,12 @@ This prototype replicates prototype 2 but in a sturdier form, exchanging the bre
 - Smaller veroboard x1
 - 9V battery x1
 - 9v battery connector x1
-<br>
--------- update images, add receiver images ---------
-<br>
--------- add images of circuit diagrams, pinouts, etc ---------
+
 <br>
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/2568b259-e17c-4ca5-a091-03b8e80cdc08" style="height:400px;" />
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/4bfb9f14-5b99-434f-a9b6-d0deb6a123b8" style="height:400px;" />
 <br>
-Photos of the first veroboard beam-break prototype, built on an Electrocookie solderable breadboard; doesn't include cabling for power.
+Photos of the first veroboard beam-break prototype for the infrared emitter, built on an Electrocookie solderable breadboard; doesn't include cabling for power.
 <br>
 
 ### Deployment, Version 1
@@ -88,27 +85,21 @@ As this is the first deployed prototype, this was the first to contain a pair of
 - Tape
 - Neodymium magnets (used for weight and balance)
 
-### Connections: MQTT
-
-
-### Deployment, Version 2
-This deployment is similar to the first iteration, but served to
-
-#### Materials for Deployment Version 2
-- 3D printed stands
-- Neodmymium magnets
-
-### Connections: Azure
-The second deployment also provided a more robust and scalable means of data storage, by leveraging the Azure cloud environment. Data enters the pipeline and is routed from the device through MQTT to Azure IoT Hub. From there, the data continues to an Azure Cosmos Database for long-term storage.
-
-
----------------- data pipeline diagram -----------------------
-
 <br>
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/5b4b36f9-9f3d-4457-9ecd-c7b2c72df90a" style="height:400px;" />
 <img src="https://github.com/andrelbourgeois/CASA0022/assets/33913141/9d147aeb-5025-4483-8d9e-400a23a78b43" style="height:400px;" />
 <br>
 Photos of the veroboard beam-break prototype, including 9v battery power; deployed on cardboard.
+
+### Deployment, Version 2
+This deployment is similar to the first iteration, but replicated in 3D printed PLA.
+
+#### Materials for Deployment Version 2
+- 3D printed stands
+- Neodmymium magnets
+
+<img src="https://github.com/andrelbourgeois/ir-beam-break-occupancy-monitor/assets/33913141/db8b4a68-9648-41f0-9ff3-6de619480ba0" style="height:400px;" />
+
 
 ## Prototype 4: PCB Beam-Break
 -------- add images of circuit diagrams, pcb layout, etc ---------
