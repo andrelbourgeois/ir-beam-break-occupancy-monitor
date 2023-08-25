@@ -11,8 +11,8 @@
 #define SIGNAL LOW
 
 // declare pins to pull data from ir receievers
-const byte RECPIN1 = 2;
-const byte RECPIN2 = 4;
+const byte RECPIN1 = 4;
+const byte RECPIN2 = 2;
 
 // declare bool variables for holding current and previous sensor readings
 //beam 1
